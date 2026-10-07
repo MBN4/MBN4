@@ -6,7 +6,10 @@
 <br/><br/>
 
 <!-- 2. MINIMALIST DARK PROFILE INTRO -->
-<h1>Hey there, I'm <span style="color: #58a6ff;">Bilal Nadeem</span> 👋</h1>
+<h1>
+  Hey there, I'm <span style="color: #58a6ff;">Bilal Nadeem</span> 
+  <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35" style="vertical-align: middle;" />
+</h1>
 
 <p align="center">
   <b>Full-Stack Engineer & AI Automation Enthusiast</b><br>
@@ -22,7 +25,7 @@
 ---
 
 <!-- 3. TECH STACK (CLEAN & CENTERED) -->
-<h3>🛠️ Tech Arsenal</h3>
+<h3>Tech Arsenal</h3>
 
 <p align="center">
   <a href="https://skillicons.dev">
