@@ -378,3 +378,10 @@ if __name__ == "__main__":
     tile("brand", "AUTOMATE", STUDIO, "#ffffff", "50+", "workflows", "Autonomous AI pipelines, LLM agents, and business process automation.", 3.35, 1)
     tile("learn", "SCALE", LEARN, "#111111", "99.9%", "uptime", "Cloud-native microservices, database architecture, and resilient systems.", 3.6, 2)
     generate_readme()
+
+# --- extras hook: spaced project grid + animated sections ---
+try:
+    import sys; sys.path.insert(0, HERE)
+    import extras; extras.main()
+except Exception as e:
+    print("extras skipped:", e)

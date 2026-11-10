@@ -12,11 +12,31 @@
   <img src="./cards/activity-light.svg" width="100%" alt="Contributions in the last 12 months">
 </picture><br>
 <a href="https://github.com/MBN4?tab=repositories"><img src="./cards/build.svg" width="33.333%" alt="BUILD: 15+ apps" /></a><a href="https://github.com/MBN4"><img src="./cards/brand.svg" width="33.333%" alt="AUTOMATE: 50+ workflows" /></a><a href="https://github.com/MBN4"><img src="./cards/learn.svg" width="33.333%" alt="SCALE: 99.9% uptime" /></a><br>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-coding-dark.svg">
-  <img src="./cards/title-coding-light.svg" width="100%" alt="What I'm coding">
-</picture><br>
-<a href="https://github.com/MBN4/Ai-Business-Analyst"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-Ai-Business-Analyst-dark.svg"><img src="./cards/repo-Ai-Business-Analyst-light.svg" width="49.5%" alt="Ai-Business-Analyst"></picture></a><a href="https://github.com/MBN4/circle-the-ai-universe"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-circle-the-ai-universe-dark.svg"><img src="./cards/repo-circle-the-ai-universe-light.svg" width="49.5%" alt="circle-the-ai-universe"></picture></a><br><a href="https://github.com/MBN4/ReelBite"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-ReelBite-dark.svg"><img src="./cards/repo-ReelBite-light.svg" width="49.5%" alt="ReelBite"></picture></a><a href="https://github.com/MBN4/Kitchens"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-Kitchens-dark.svg"><img src="./cards/repo-Kitchens-light.svg" width="49.5%" alt="Kitchens"></picture></a><br>
+<!-- extras:start -->
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-projects-dark.svg"><img src="./cards/sect-projects-light.svg" alt="What I&#x27;m coding" width="100%"></picture>
+</div>
+<div align="center">
+<a href="https://github.com/MBN4/Ai-Business-Analyst"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/proj-ai-business-analyst-dark.svg"><img src="./cards/proj-ai-business-analyst-light.svg" alt="Ai-Business-Analyst" width="49%"></picture></a>
+<a href="https://github.com/MBN4/circle-the-ai-universe"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/proj-circle-the-ai-universe-dark.svg"><img src="./cards/proj-circle-the-ai-universe-light.svg" alt="circle-the-ai-universe" width="49%"></picture></a>
+</div>
+<div align="center">
+<a href="https://github.com/MBN4/ReelBite"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/proj-reelbite-dark.svg"><img src="./cards/proj-reelbite-light.svg" alt="ReelBite" width="49%"></picture></a>
+<a href="https://github.com/MBN4/Kitchens"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/proj-kitchens-dark.svg"><img src="./cards/proj-kitchens-light.svg" alt="Kitchens" width="49%"></picture></a>
+</div>
+<br>
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-terminal-dark.svg"><img src="./cards/sect-terminal-light.svg" alt="Terminal" width="100%"></picture>
+</div>
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-marquee-dark.svg"><img src="./cards/sect-marquee-light.svg" alt="Toolbox" width="100%"></picture>
+</div>
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-orbit-dark.svg"><img src="./cards/sect-orbit-light.svg" alt="The stack, in orbit" width="100%"></picture>
+</div>
+<!-- extras:end -->
+
+
 </div>
 
 <p align="center">
