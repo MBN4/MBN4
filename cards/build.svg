@@ -25,6 +25,42 @@
 .ro{transform-box:fill-box;animation:roll .8s cubic-bezier(.15,.8,.2,1) both}
 .sh{animation:sheen 5s ease-in-out infinite}
 .rg{opacity:0;transform-box:fill-box;transform-origin:center;animation:ring 1s ease-out both}
+
+/* Theme Adaptive Tokens */
+.bg { fill: #f3f3f1; stroke: #e2e2de; stroke-width: 1px; }
+.ink { fill: #111111; }
+.soft { fill: #3a3a3c; }
+.muted { fill: #6e6e73; }
+.rule { fill: #dcdcd7; }
+.bar-default { fill: #111111; }
+.bar-partial { fill: #c9c9c4; }
+.grad-base { stop-color: #111111; }
+
+.c-0 { fill: #e2e2de; }
+.c-1 { fill: #c8d3ff; }
+.c-2 { fill: #94a8ff; }
+.c-3 { fill: #6280ff; }
+.c-4 { fill: #2f55ff; }
+.c-5 { fill: #1a3be0; }
+
+@media (prefers-color-scheme: dark) {
+  .bg { fill: #161b22; stroke: #30363d; stroke-width: 1px; }
+  .ink { fill: #f0f6fc; }
+  .soft { fill: #c9d1d9; }
+  .muted { fill: #8b949e; }
+  .rule { fill: #30363d; }
+  .bar-default { fill: #8b949e; }
+  .bar-partial { fill: #30363d; }
+  .grad-base { stop-color: #f0f6fc; }
+
+  .c-0 { fill: #21262d; }
+  .c-1 { fill: #162c64; }
+  .c-2 { fill: #1f4299; }
+  .c-3 { fill: #2b5cd9; }
+  .c-4 { fill: #487fff; }
+  .c-5 { fill: #79a6ff; }
+}
+
 @media (prefers-reduced-motion: reduce){.r,.f,.g,.p,.live,.n,.nu,.ti,.sl,.ai,.ro,.rg{animation:none!important;opacity:1!important;transform:none!important}.sh,.rg{display:none}}
 </style>
 <defs>

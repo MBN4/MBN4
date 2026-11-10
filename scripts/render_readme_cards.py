@@ -8,9 +8,11 @@ DATA = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "cards")
 FONTS = os.path.join(ROOT, "fonts")
 
-PAPER, INK, INK_SOFT, MUTED, RULE, TECH, STUDIO, LEARN, W = (
-    "#f3f3f1", "#111111", "#3a3a3c", "#6e6e73", "#dcdcd7", "#2f55ff", "#ef3b2d", "#ffc81a", 880
-)
+TECH = "#2f55ff"
+STUDIO = "#ef3b2d"
+LEARN = "#ffc81a"
+W = 880
+
 SERIF = "'Instrument Serif', Georgia, serif"
 SANS = "Geist, system-ui, -apple-system, sans-serif"
 MONO = "'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
@@ -50,6 +52,42 @@ BASE_CSS = """
 .ro{transform-box:fill-box;animation:roll .8s cubic-bezier(.15,.8,.2,1) both}
 .sh{animation:sheen 5s ease-in-out infinite}
 .rg{opacity:0;transform-box:fill-box;transform-origin:center;animation:ring 1s ease-out both}
+
+/* Theme Adaptive Tokens */
+.bg { fill: #f3f3f1; stroke: #e2e2de; stroke-width: 1px; }
+.ink { fill: #111111; }
+.soft { fill: #3a3a3c; }
+.muted { fill: #6e6e73; }
+.rule { fill: #dcdcd7; }
+.bar-default { fill: #111111; }
+.bar-partial { fill: #c9c9c4; }
+.grad-base { stop-color: #111111; }
+
+.c-0 { fill: #e2e2de; }
+.c-1 { fill: #c8d3ff; }
+.c-2 { fill: #94a8ff; }
+.c-3 { fill: #6280ff; }
+.c-4 { fill: #2f55ff; }
+.c-5 { fill: #1a3be0; }
+
+@media (prefers-color-scheme: dark) {
+  .bg { fill: #161b22; stroke: #30363d; stroke-width: 1px; }
+  .ink { fill: #f0f6fc; }
+  .soft { fill: #c9d1d9; }
+  .muted { fill: #8b949e; }
+  .rule { fill: #30363d; }
+  .bar-default { fill: #8b949e; }
+  .bar-partial { fill: #30363d; }
+  .grad-base { stop-color: #f0f6fc; }
+
+  .c-0 { fill: #21262d; }
+  .c-1 { fill: #162c64; }
+  .c-2 { fill: #1f4299; }
+  .c-3 { fill: #2b5cd9; }
+  .c-4 { fill: #487fff; }
+  .c-5 { fill: #79a6ff; }
+}
+
 @media (prefers-reduced-motion: reduce){.r,.f,.g,.p,.live,.n,.nu,.ti,.sl,.ai,.ro,.rg{animation:none!important;opacity:1!important;transform:none!important}.sh,.rg{display:none}}
 """
 
@@ -91,30 +129,30 @@ def hero():
         img_b64 = base64.b64encode(open(photo, "rb").read()).decode()
         portrait_svg = f"""
         <defs><clipPath id="circle-photo"><circle cx="680" cy="210" r="130"/></clipPath></defs>
-        <circle cx="680" cy="210" r="135" fill="none" stroke="{TECH}" stroke-width="2" class="live"/>
+        <circle cx="680" cy="210" r="135" fill="none" stroke="{TECH}" stroke-width="2.5" class="live"/>
         <image href="data:image/jpeg;base64,{img_b64}" x="550" y="80" width="260" height="260" clip-path="url(#circle-photo)" preserveAspectRatio="xMidYMid slice" class="f" {d(0.3)}/>
         """
     body = f"""
 <defs>
   <linearGradient id="shine" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="600" y2="0">
-    <stop offset="0" stop-color="{INK}"/><stop offset=".42" stop-color="{INK}"/>
-    <stop offset=".5" stop-color="{TECH}"/><stop offset=".58" stop-color="{INK}"/>
-    <stop offset="1" stop-color="{INK}"/>
+    <stop offset="0" class="grad-base"/><stop offset=".42" class="grad-base"/>
+    <stop offset=".5" stop-color="{TECH}"/><stop offset=".58" class="grad-base"/>
+    <stop offset="1" class="grad-base"/>
     <animateTransform attributeName="gradientTransform" type="translate" values="-600 0;600 0;600 0" keyTimes="0;.45;1" dur="7s" begin="1.6s" repeatCount="indefinite"/>
   </linearGradient>
 </defs>
-<rect width="{W}" height="{h}" rx="14" fill="{PAPER}"/>
+<rect width="{W}" height="{h}" rx="14" class="bg"/>
 <g class="f" {d(0)}>
   <rect class="live" x="48" y="49" width="8" height="8" rx="2" fill="{TECH}"/>
-  <text x="66" y="57" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">FULL-STACK ARCHITECT &amp; AI SPECIALIST</text>
+  <text x="66" y="57" font-family="{MONO}" font-size="12" letter-spacing="1" class="muted">FULL-STACK ARCHITECT &amp; AI SPECIALIST</text>
 </g>
-<text class="r" {d(0.15)} x="44" y="190" font-family="{SERIF}" font-size="116" letter-spacing="-2.5" fill="{INK}">Bilal</text>
+<text class="r ink" {d(0.15)} x="44" y="190" font-family="{SERIF}" font-size="116" letter-spacing="-2.5">Bilal</text>
 <text class="r" {d(0.3)} x="44" y="290" font-family="{SERIF}" font-style="italic" font-size="116" letter-spacing="-2.5" fill="url(#shine)">Nadeem</text>
 <g class="r" {d(0.55)}>
-  {text_lines(48, 338, ["Building scalable web applications, intelligent automation,", "and modern cloud systems."], 27, f'font-family="{SANS}" font-size="18" fill="{INK_SOFT}"')}
+  {text_lines(48, 338, ["Building scalable web applications, intelligent automation,", "and modern cloud systems."], 27, f'font-family="{SANS}" font-size="18" class="soft"')}
 </g>
 <g class="f" {d(0.8)}>
-  <text x="48" y="396" font-family="{MONO}" font-size="13" fill="{INK}">github.com/MBN4</text>
+  <text x="48" y="396" font-family="{MONO}" font-size="13" class="ink">github.com/MBN4</text>
   <text class="nu" x="186" y="396" font-family="{MONO}" font-size="13" fill="{TECH}">&#8599;</text>
 </g>
 {portrait_svg}
@@ -174,9 +212,9 @@ def activity(data):
         is_best = m is best and m["total"] > 0
         bh = max(4, round(m["total"] / top * maxh))
         x = x0 + i * (bw + gap)
-        fill = TECH if is_best else ("#c9c9c4" if partial else INK)
+        fill_cls = 'fill="{}"'.format(TECH) if is_best else ('class="bar-partial"' if partial else 'class="bar-default"')
         label = datetime.date.fromisoformat(m["month"] + "-01").strftime("%b")
-        bars.append(f'<rect class="g" style="animation-delay:{2.2 + i * 0.07:.2f}s" x="{x:.1f}" y="{base - bh}" width="{bw:.1f}" height="{bh}" rx="4" fill="{fill}"><title>{label}: {m["total"]:,}</title></rect><text class="f" style="animation-delay:{2.2 + i * 0.07:.2f}s" x="{x + bw / 2:.1f}" y="{base + 22}" text-anchor="middle" font-family="{MONO}" font-size="11" fill="{MUTED}">{label}</text>')
+        bars.append(f'<rect class="g" {fill_cls} style="animation-delay:{2.2 + i * 0.07:.2f}s" x="{x:.1f}" y="{base - bh}" width="{bw:.1f}" height="{bh}" rx="4"><title>{label}: {m["total"]:,}</title></rect><text class="f muted" style="animation-delay:{2.2 + i * 0.07:.2f}s" x="{x + bw / 2:.1f}" y="{base + 22}" text-anchor="middle" font-family="{MONO}" font-size="11">{label}</text>')
         if is_best:
             bars.append(f'<text class="p" style="animation-delay:3.2s" x="{x + bw / 2:.1f}" y="{base - bh - 10}" text-anchor="middle" font-family="{MONO}" font-size="11" fill="{TECH}">{m["total"]:,}</text>')
     cs = data.get("current_streak", {}).get("length", 0)
@@ -185,18 +223,18 @@ def activity(data):
     total_days = len(data.get("days", [])) or 365
     stats = [
         (f'{cs} <tspan font-style="italic">days</tspan>', streak_note),
-        (f'{data.get("active_days", 0)}<tspan fill="#8e8e93"> / {total_days}</tspan>', "days with a commit"),
+        (f'{data.get("active_days", 0)}<tspan class="muted"> / {total_days}</tspan>', "days with a commit"),
         (f'{data.get("best_day", {}).get("count", 0)}', "on the busiest day"),
     ]
     side = []
     for i, (big, small) in enumerate(stats):
         y = 104 + i * 92
-        side.append(f'<g class="r" {d(2.6 + i * 0.15)}><text x="650" y="{y}" font-family="{SERIF}" font-size="40" fill="{INK}">{big}</text><text x="650" y="{y + 24}" font-family="{SANS}" font-size="13" fill="{MUTED}">{small}</text></g>')
-        if i < 2: side.append(f'<rect class="f" {d(2.6)} x="650" y="{y + 44}" width="190" height="1" fill="{RULE}"/>')
+        side.append(f'<g class="r" {d(2.6 + i * 0.15)}><text class="ink" x="650" y="{y}" font-family="{SERIF}" font-size="40">{big}</text><text class="muted" x="650" y="{y + 24}" font-family="{SANS}" font-size="13">{small}</text></g>')
+        if i < 2: side.append(f'<rect class="f rule" {d(2.6)} x="650" y="{y + 44}" width="190" height="1"/>')
     body = f"""
-<rect width="{W}" height="{h}" rx="14" fill="{PAPER}"/>
-<text class="f" {d(1.9)} x="40" y="58" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">THE LAST 12 MONTHS ON GITHUB</text>
-<text class="r" {d(2.0)} x="38" y="114" font-family="{SERIF}" font-size="52" fill="{INK}">{data.get("total_contributions", 0):,} <tspan font-style="italic">contributions</tspan></text>
+<rect width="{W}" height="{h}" rx="14" class="bg"/>
+<text class="f muted" {d(1.9)} x="40" y="58" font-family="{MONO}" font-size="12" letter-spacing="1">THE LAST 12 MONTHS ON GITHUB</text>
+<text class="r ink" {d(2.0)} x="38" y="114" font-family="{SERIF}" font-size="52">{data.get("total_contributions", 0):,} <tspan font-style="italic">contributions</tspan></text>
 {''.join(bars)}
 {''.join(side)}
 """
@@ -213,22 +251,21 @@ def repo_card(i, name, desc, lang, color):
     delay = 4.6 + i * 0.12
     meta = f"{lang}  ·  public"
     body = f"""
-<rect width="{REPO_W}" height="{REPO_H}" rx="14" fill="{PAPER}"/>
+<rect width="{REPO_W}" height="{REPO_H}" rx="14" class="bg"/>
 <g class="r" {d(delay)}>
   <rect x="24" y="30" width="8" height="8" rx="2" fill="{color}"/>
-  <text x="40" y="39" font-family="{SANS}" font-weight="600" font-size="17" fill="{INK}">{escape(name)}</text>
-  {text_lines(24, 72, wrap(desc, 34), 21, f'font-family="{SANS}" font-size="14" fill="{INK_SOFT}"')}
-  <text x="24" y="{REPO_H - 24}" font-family="{MONO}" font-size="12" fill="{MUTED}">{escape(meta)}</text>
+  <text class="ink" x="40" y="39" font-family="{SANS}" font-weight="600" font-size="17">{escape(name)}</text>
+  {text_lines(24, 72, wrap(desc, 34), 21, f'font-family="{SANS}" font-size="14" class="soft"')}
+  <text class="muted" x="24" y="{REPO_H - 24}" font-family="{MONO}" font-size="12">{escape(meta)}</text>
 </g>
 """
     write(f"repo-{name}.svg", svg(REPO_W, REPO_H, body, ["sans", "sans-b", "mono"], f"{name}: {desc}", left=4 * i, right=8 - 4 * i))
 
 def section_title(text, italic, theme):
-    fg = "#e6edf3" if theme == "dark" else INK
+    fg = "#f0f6fc" if theme == "dark" else "#111111"
     body = f'<text class="r" {d(4.4)} x="2" y="46" font-family="{SERIF}" font-size="34" fill="{fg}">{escape(text)} <tspan font-style="italic">{escape(italic)}</tspan></text>'
     write(f"title-coding-{theme}.svg", svg(W, 64, body, ["serif", "serif-i"], f"{text} {italic}", bottom=0))
 
-BLUE = ["#e2e2de", "#c8d3ff", "#94a8ff", "#6280ff", TECH, "#1a3be0"]
 def level_for(c): return 0 if c == 0 else 1 if c <= 3 else 2 if c <= 8 else 3 if c <= 15 else 4 if c <= 25 else 5
 
 def heatmap(data):
@@ -247,22 +284,22 @@ def heatmap(data):
             months.append((col, date.strftime("%b")))
         c = day["count"]
         delay = 1.0 + col * 0.03 + row * 0.02
-        cells.append(f'<rect class="p" style="animation-delay:{delay:.2f}s" x="{gx + col * step}" y="{gy + row * step}" width="{cell}" height="{cell}" rx="3" fill="{BLUE[level_for(c)]}"><title>{day["date"]}: {c} contributions</title></rect>')
+        cells.append(f'<rect class="p c-{level_for(c)}" style="animation-delay:{delay:.2f}s" x="{gx + col * step}" y="{gy + row * step}" width="{cell}" height="{cell}" rx="3"><title>{day["date"]}: {c} contributions</title></rect>')
     ncols = (len(days) + lead + 6) // 7
     right = gx + ncols * step - 3
-    labels = "".join(f'<text x="{gx + col * step}" y="{gy + 7 * step + 16}" font-family="{MONO}" font-size="11" fill="{MUTED}">{m}</text>' for col, m in months if col < ncols - 12)
-    legend_x = right - len(BLUE) * 14
-    legend = "".join(f'<rect x="{legend_x + i * 14}" y="{gy + 7 * step + 6}" width="11" height="11" rx="2.5" fill="{c}"/>' for i, c in enumerate(BLUE))
+    labels = "".join(f'<text class="muted" x="{gx + col * step}" y="{gy + 7 * step + 16}" font-family="{MONO}" font-size="11">{m}</text>' for col, m in months if col < ncols - 12)
+    legend_x = right - 6 * 14
+    legend = "".join(f'<rect class="c-{i}" x="{legend_x + i * 14}" y="{gy + 7 * step + 6}" width="11" height="11" rx="2.5"/>' for i in range(6))
     h = gy + 7 * step + 44
     body = f"""
-<rect width="{W}" height="{h}" rx="14" fill="{PAPER}"/>
-<text class="r" {d(0.8)} x="42" y="62" font-family="{SERIF}" font-size="34" fill="{INK}">Every day, <tspan font-style="italic" fill="{TECH}">in blue</tspan></text>
-<text class="f" {d(0.8)} x="{right}" y="60" text-anchor="end" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">REFRESHED DAILY</text>
+<rect width="{W}" height="{h}" rx="14" class="bg"/>
+<text class="r ink" {d(0.8)} x="42" y="62" font-family="{SERIF}" font-size="34">Every day, <tspan font-style="italic" fill="{TECH}">in blue</tspan></text>
+<text class="f muted" {d(0.8)} x="{right}" y="60" text-anchor="end" font-family="{MONO}" font-size="12" letter-spacing="1">REFRESHED DAILY</text>
 {''.join(cells)}
 <g class="f" {d(2.4)}>{labels}
-<text x="{legend_x - 8}" y="{gy + 7 * step + 16}" text-anchor="end" font-family="{MONO}" font-size="11" fill="{MUTED}">less</text>
+<text class="muted" x="{legend_x - 8}" y="{gy + 7 * step + 16}" text-anchor="end" font-family="{MONO}" font-size="11">less</text>
 {legend}
-<text x="{legend_x + len(BLUE) * 14 + 2}" y="{gy + 7 * step + 16}" font-family="{MONO}" font-size="11" fill="{MUTED}">more</text></g>
+<text class="muted" x="{legend_x + 6 * 14 + 2}" y="{gy + 7 * step + 16}" font-family="{MONO}" font-size="11">more</text></g>
 """
     write("heatmap.svg", svg(W, h, body, ["serif", "serif-i", "mono"], "Heatmap"))
 
@@ -271,7 +308,7 @@ if __name__ == "__main__":
     hero()
     tile("build", "BUILD", TECH, "#ffffff", "15+", "apps", "Production SaaS applications, modern full-stack web apps, and MVPs.", 3.1, 0)
     tile("brand", "AUTOMATE", STUDIO, "#ffffff", "50+", "workflows", "Autonomous AI pipelines, LLM agents, and business process automation.", 3.35, 1)
-    tile("learn", "SCALE", LEARN, INK, "99.9%", "uptime", "Cloud-native microservices, database architecture, and resilient systems.", 3.6, 2)
+    tile("learn", "SCALE", LEARN, "#111111", "99.9%", "uptime", "Cloud-native microservices, database architecture, and resilient systems.", 3.6, 2)
     activity(data)
     for i, (name, desc, lang, color) in enumerate(REPOS):
         repo_card(i, name, desc, lang, color)
