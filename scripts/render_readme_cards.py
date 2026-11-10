@@ -385,3 +385,9 @@ try:
     import extras; extras.main()
 except Exception as e:
     print("extras skipped:", e)
+
+# --- extras2 hook: pipeline, code editor, neural net, weekly rhythm, CTA ---
+try:
+    import extras2; extras2.main()
+except Exception as e:
+    print("extras2 skipped:", e)

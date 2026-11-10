@@ -35,6 +35,23 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-orbit-dark.svg"><img src="./cards/sect-orbit-light.svg" alt="The stack, in orbit" width="100%"></picture>
 </div>
 <!-- extras:end -->
+<!-- extras2:start -->
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-pipeline-dark.svg"><img src="./cards/sect-pipeline-light.svg" alt="From idea to production" width="100%"></picture>
+</div>
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-code-dark.svg"><img src="./cards/sect-code-light.svg" alt="agent.ts" width="100%"></picture>
+</div>
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-neural-dark.svg"><img src="./cards/sect-neural-light.svg" alt="Intelligence, wired in" width="100%"></picture>
+</div>
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-rhythm-dark.svg"><img src="./cards/sect-rhythm-light.svg" alt="A week in commits" width="100%"></picture>
+</div>
+<div align="center">
+<a href="https://linkedin.com/in/bilal-nadeem"><picture><source media="(prefers-color-scheme: dark)" srcset="./cards/sect-cta-dark.svg"><img src="./cards/sect-cta-light.svg" alt="Let&#x27;s build something remarkable" width="100%"></picture></a>
+</div>
+<!-- extras2:end -->
 
 
 </div>
