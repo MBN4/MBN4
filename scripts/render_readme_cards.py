@@ -8,6 +8,41 @@ DATA = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "cards")
 FONTS = os.path.join(ROOT, "fonts")
 
+# ==============================================================================
+# ⚙️ EDIT YOUR SHOWCASE & LINKS HERE ANYTIME
+# ==============================================================================
+LINKEDIN_URL = "https://linkedin.com/in/bilal-nadeem"   # <-- PASTE YOUR LINKEDIN HERE
+PORTFOLIO_URL = "https://github.com/MBN4"
+
+# Add, edit, or remove projects here (supports 2, 3, or 4 projects dynamically)
+REPOS = [
+    {
+        "name": "Ai-Business-Analyst",
+        "desc": "AI-powered automated business analytics and data processing insights.",
+        "lang": "JavaScript",
+        "color": "#3fb950"
+    },
+    {
+        "name": "circle-the-ai-universe",
+        "desc": "Curated interactive universe platform exploring AI models & tools.",
+        "lang": "TypeScript",
+        "color": "#ef3b2d"
+    },
+    {
+        "name": "ReelBite",
+        "desc": "Interactive full-stack media platform with modern UX and APIs.",
+        "lang": "JavaScript",
+        "color": "#ffc81a"
+    },
+    {
+        "name": "Kitchens",
+        "desc": "Full-stack kitchen order & inventory management cloud system.",
+        "lang": "JavaScript",
+        "color": "#3fb950"
+    }
+]
+# ==============================================================================
+
 GREEN_LIGHT = "#2ea043"
 GREEN_DARK = "#3fb950"
 STUDIO = "#ef3b2d"
@@ -88,16 +123,8 @@ def text_lines(x, y, lines, lh, attrs):
 
 def get_theme_colors(theme):
     if theme == "dark":
-        return {
-            "bg": "#161b22", "border": "#30363d", "ink": "#f0f6fc",
-            "soft": "#c9d1d9", "muted": "#8b949e", "rule": "#30363d",
-            "accent": GREEN_DARK, "bar": "#8b949e", "partial": "#30363d"
-        }
-    return {
-        "bg": "#f3f3f1", "border": "#e2e2de", "ink": "#111111",
-        "soft": "#3a3a3c", "muted": "#6e6e73", "rule": "#dcdcd7",
-        "accent": GREEN_LIGHT, "bar": "#111111", "partial": "#c9c9c4"
-    }
+        return {"bg": "#161b22", "border": "#30363d", "ink": "#f0f6fc", "soft": "#c9d1d9", "muted": "#8b949e", "rule": "#30363d", "accent": GREEN_DARK, "bar": "#8b949e", "partial": "#30363d"}
+    return {"bg": "#f3f3f1", "border": "#e2e2de", "ink": "#111111", "soft": "#3a3a3c", "muted": "#6e6e73", "rule": "#dcdcd7", "accent": GREEN_LIGHT, "bar": "#111111", "partial": "#c9c9c4"}
 
 def hero(theme):
     c = get_theme_colors(theme)
@@ -220,27 +247,21 @@ def activity(data, theme):
 """
     write(f"activity-{theme}.svg", svg(W, h, body, ["serif", "serif-i", "sans", "mono"], "Activity"))
 
-REPO_W, REPO_H = 880 / 3 - 8, 176
-REPOS = [
-    ("Ai-Business-Analyst", "AI-powered automated business analytics and data processing insights.", "JavaScript", GREEN_DARK),
-    ("circle-the-ai-universe", "Curated interactive universe platform exploring AI models & tools.", "TypeScript", STUDIO),
-    ("ReelBite", "Interactive full-stack media platform with modern UX and APIs.", "JavaScript", LEARN),
-]
-
-def repo_card(i, name, desc, lang, color, theme):
+# ---- DYNAMIC REPO CARDS (Supports 2x2 grid or 1x3) ----------------------------
+def repo_card(repo_w, repo_h, idx, name, desc, lang, color, theme):
     c = get_theme_colors(theme)
-    delay = 4.6 + i * 0.12
+    delay = 4.6 + idx * 0.1
     meta = f"{lang}  ·  public"
     body = f"""
-<rect width="{REPO_W}" height="{REPO_H}" rx="14" fill="{c['bg']}" stroke="{c['border']}" stroke-width="1"/>
+<rect width="{repo_w}" height="{repo_h}" rx="14" fill="{c['bg']}" stroke="{c['border']}" stroke-width="1"/>
 <g class="r" {d(delay)}>
-  <rect x="24" y="30" width="8" height="8" rx="2" fill="{color}"/>
-  <text fill="{c['ink']}" x="40" y="39" font-family="{SANS}" font-weight="600" font-size="17">{escape(name)}</text>
-  {text_lines(24, 72, wrap(desc, 34), 21, f'font-family="{SANS}" font-size="14" fill="{c["soft"]}"')}
-  <text fill="{c['muted']}" x="24" y="{REPO_H - 24}" font-family="{MONO}" font-size="12">{escape(meta)}</text>
+  <rect x="24" y="28" width="8" height="8" rx="2" fill="{color}"/>
+  <text fill="{c['ink']}" x="40" y="37" font-family="{SANS}" font-weight="600" font-size="17">{escape(name)}</text>
+  {text_lines(24, 68, wrap(desc, 46 if repo_w > 300 else 34), 21, f'font-family="{SANS}" font-size="14" fill="{c["soft"]}"')}
+  <text fill="{c['muted']}" x="24" y="{repo_h - 22}" font-family="{MONO}" font-size="12">{escape(meta)}</text>
 </g>
 """
-    write(f"repo-{name}-{theme}.svg", svg(REPO_W, REPO_H, body, ["sans", "sans-b", "mono"], f"{name}: {desc}", left=4 * i, right=8 - 4 * i))
+    write(f"repo-{name}-{theme}.svg", svg(repo_w, repo_h, body, ["sans", "sans-b", "mono"], f"{name}: {desc}"))
 
 def section_title(text, italic, theme):
     fg = "#f0f6fc" if theme == "dark" else "#111111"
@@ -289,15 +310,71 @@ def heatmap(data, theme):
 """
     write(f"heatmap-{theme}.svg", svg(W, h, body, ["serif", "serif-i", "mono"], "Heatmap"))
 
+def generate_readme():
+    repo_blocks = []
+    if len(REPOS) == 4:
+        # 2x2 grid (2 cards per row at 49.5% width)
+        for i in range(0, 4, 2):
+            r1, r2 = REPOS[i], REPOS[i+1]
+            repo_blocks.append(
+                f'<a href="https://github.com/MBN4/{r1["name"]}">'
+                f'<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-{r1["name"]}-dark.svg">'
+                f'<img src="./cards/repo-{r1["name"]}-light.svg" width="49.5%" alt="{r1["name"]}"></picture></a>'
+                f'<a href="https://github.com/MBN4/{r2["name"]}">'
+                f'<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-{r2["name"]}-dark.svg">'
+                f'<img src="./cards/repo-{r2["name"]}-light.svg" width="49.5%" alt="{r2["name"]}"></picture></a><br>'
+            )
+    else:
+        # 1x3 row
+        row = ""
+        for r in REPOS:
+            row += (
+                f'<a href="https://github.com/MBN4/{r["name"]}">'
+                f'<picture><source media="(prefers-color-scheme: dark)" srcset="./cards/repo-{r["name"]}-dark.svg">'
+                f'<img src="./cards/repo-{r["name"]}-light.svg" width="33.333%" alt="{r["name"]}"></picture></a>'
+            )
+        repo_blocks.append(row)
+
+    md = f"""<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/hero-dark.svg">
+  <img src="./cards/hero-light.svg" width="100%" alt="Bilal Nadeem - Full-Stack Architect & AI Specialist">
+</picture><br>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/heatmap-dark.svg">
+  <img src="./cards/heatmap-light.svg" width="100%" alt="Bilal's contribution graph, in green, refreshed daily">
+</picture><br>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/activity-dark.svg">
+  <img src="./cards/activity-light.svg" width="100%" alt="Contributions in the last 12 months">
+</picture><br>
+<a href="https://github.com/MBN4?tab=repositories"><img src="./cards/build.svg" width="33.333%" alt="BUILD: 15+ apps" /></a><a href="https://github.com/MBN4"><img src="./cards/brand.svg" width="33.333%" alt="AUTOMATE: 50+ workflows" /></a><a href="https://github.com/MBN4"><img src="./cards/learn.svg" width="33.333%" alt="SCALE: 99.9% uptime" /></a><br>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-coding-dark.svg">
+  <img src="./cards/title-coding-light.svg" width="100%" alt="What I'm coding">
+</picture><br>
+{''.join(repo_blocks)}
+</div>
+
+<p align="center">
+<a href="{PORTFOLIO_URL}">github.com/MBN4</a> &nbsp;/&nbsp; <a href="{LINKEDIN_URL}">linkedin</a>
+</p>
+"""
+    with open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8") as f:
+        f.write(md)
+
 if __name__ == "__main__":
     data = json.load(open(DATA)) if os.path.exists(DATA) else {}
     for t in ["light", "dark"]:
         hero(t)
         activity(data, t)
         heatmap(data, t)
-        for i, (name, desc, lang, color) in enumerate(REPOS):
-            repo_card(i, name, desc, lang, color, t)
         section_title("What I'm", "coding", t)
+        repo_w = 434 if len(REPOS) == 4 else 285
+        repo_h = 160
+        for i, r in enumerate(REPOS):
+            repo_card(repo_w, repo_h, i, r["name"], r["desc"], r["lang"], r["color"], t)
     tile("build", "BUILD", "#238636", "#ffffff", "15+", "apps", "Production SaaS applications, modern full-stack web apps, and MVPs.", 3.1, 0)
     tile("brand", "AUTOMATE", STUDIO, "#ffffff", "50+", "workflows", "Autonomous AI pipelines, LLM agents, and business process automation.", 3.35, 1)
     tile("learn", "SCALE", LEARN, "#111111", "99.9%", "uptime", "Cloud-native microservices, database architecture, and resilient systems.", 3.6, 2)
+    generate_readme()
